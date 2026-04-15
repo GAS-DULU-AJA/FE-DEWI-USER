@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-manrope), sans-serif;
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-jakarta), sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -127,4 +127,75 @@
   html {
     @apply font-sans;
   }
+}
+
+/* ── Design System: VilaVerde color palette ── */
+@theme {
+  /* Brand greens */
+  --color-primary: #2d6a4f;
+  --color-primary-dim: #1f5e44;
+  --color-primary-fixed: #b1f0ce;
+  --color-primary-fixed-dim: #a3e2c0;
+  --color-primary-container: #b1f0ce;
+  --color-on-primary: #e6ffee;
+  --color-on-primary-fixed: #014931;
+  --color-on-primary-fixed-variant: #29664c;
+  --color-on-primary-container: #1d5c42;
+  --color-inverse-primary: #beffdc;
+
+  /* Brand secondary */
+  --color-secondary: #576342;
+  --color-secondary-dim: #4b5737;
+  --color-secondary-fixed: #dae8be;
+  --color-secondary-fixed-dim: #cbdab0;
+  --color-secondary-container: #dae8be;
+  --color-on-secondary: #f0ffd3;
+  --color-on-secondary-fixed: #374325;
+  --color-on-secondary-fixed-variant: #53603f;
+  --color-on-secondary-container: #4a5636;
+
+  /* Brand tertiary */
+  --color-tertiary: #7e572e;
+  --color-tertiary-dim: #704b23;
+  --color-tertiary-fixed: #d9a777;
+  --color-tertiary-fixed-dim: #ca9a6b;
+  --color-tertiary-container: #d9a777;
+  --color-on-tertiary: #fff7f4;
+  --color-on-tertiary-fixed: #271300;
+  --color-on-tertiary-fixed-variant: #53320b;
+  --color-on-tertiary-container: #482904;
+
+  /* Surfaces */
+  --color-surface: #f8f9fa;
+  --color-surface-dim: #d5dbdd;
+  --color-surface-bright: #f8f9fa;
+  --color-surface-tint: #2d6a4f;
+  --color-surface-variant: #dee3e6;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f1f4f5;
+  --color-surface-container: #ebeef0;
+  --color-surface-container-high: #e5e9eb;
+  --color-surface-container-highest: #dee3e6;
+
+  /* On-surface */
+  --color-on-surface: #2d3335;
+  --color-on-surface-variant: #5a6062;
+  --color-inverse-surface: #0c0f10;
+  --color-inverse-on-surface: #9b9d9e;
+
+  /* Errors */
+  --color-error: #a83836;
+  --color-error-dim: #67040d;
+  --color-error-container: #fa746f;
+  --color-on-error: #fff7f6;
+  --color-on-error-container: #6e0a12;
+
+  /* Outline */
+  --color-outline: #767c7e;
+  --color-outline-variant: #adb3b5;
+
+  /* Fonts */
+  --font-headline: var(--font-jakarta), "Plus Jakarta Sans", sans-serif;
+  --font-body: var(--font-manrope), "Manrope", sans-serif;
+  --font-label: var(--font-manrope), "Manrope", sans-serif;
 }
