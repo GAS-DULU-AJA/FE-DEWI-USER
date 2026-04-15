@@ -231,6 +231,32 @@ const DETAIL_GALLERY_IMAGES = [
   "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?q=80&w=1400&auto=format&fit=crop",
 ];
 
+const FACILITY_TEMPLATES = [
+  { id: "f1", icon: "wc", label: "Toilets" },
+  { id: "f2", icon: "local_parking", label: "Parking" },
+  { id: "f3", icon: "person_check", label: "Guide" },
+  { id: "f4", icon: "restaurant", label: "Warung" },
+  { id: "f5", icon: "temple_hindu", label: "Prayer" },
+  { id: "f6", icon: "local_mall", label: "Souvenirs" },
+];
+
+const EVENT_TEMPLATES = [
+  {
+    day: "15",
+    month: "AUG",
+    title: "Galungan Celebration",
+    description:
+      "The most significant Balinese celebration, marked by ritual offerings and village processions.",
+  },
+  {
+    day: "22",
+    month: "SEP",
+    title: "Village Craft Workshop",
+    description:
+      "Learn bamboo and fiber craft techniques with local artisans in a community-led session.",
+  },
+];
+
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
@@ -280,6 +306,122 @@ function buildGallery(seed: DestinationSeed, index: number): string[] {
   );
 }
 
+function buildAttractions(seed: DestinationSeed, index: number) {
+  const imageA = DETAIL_GALLERY_IMAGES[index % DETAIL_GALLERY_IMAGES.length];
+  const imageB =
+    DETAIL_GALLERY_IMAGES[(index + 1) % DETAIL_GALLERY_IMAGES.length];
+  const imageC =
+    DETAIL_GALLERY_IMAGES[(index + 2) % DETAIL_GALLERY_IMAGES.length];
+
+  return [
+    {
+      id: `${seed.baseSlug}-${index}-at-1`,
+      title: "Sacred Bamboo Forest",
+      description: "A peaceful trail through towering bamboo and ritual paths.",
+      image: imageA,
+      tag: "Nature",
+    },
+    {
+      id: `${seed.baseSlug}-${index}-at-2`,
+      title: "Village Main Gateway",
+      description:
+        "A landmark entry point that reflects traditional village identity.",
+      image: imageB,
+      tag: "Architecture",
+    },
+    {
+      id: `${seed.baseSlug}-${index}-at-3`,
+      title: "Community Temple Courtyard",
+      description:
+        "A spiritual gathering space where major ceremonies are held.",
+      image: imageC,
+      tag: "Spiritual",
+    },
+  ];
+}
+
+function buildEvents(seed: DestinationSeed, index: number) {
+  return EVENT_TEMPLATES.map((item, eventIndex) => ({
+    id: `${seed.baseSlug}-${index}-ev-${eventIndex + 1}`,
+    ...item,
+  }));
+}
+
+function buildLocalProducts(seed: DestinationSeed, index: number) {
+  const imageA =
+    DETAIL_GALLERY_IMAGES[(index + 2) % DETAIL_GALLERY_IMAGES.length];
+  const imageB =
+    DETAIL_GALLERY_IMAGES[(index + 3) % DETAIL_GALLERY_IMAGES.length];
+  const imageC =
+    DETAIL_GALLERY_IMAGES[(index + 4) % DETAIL_GALLERY_IMAGES.length];
+
+  return [
+    {
+      id: `${seed.baseSlug}-${index}-prd-1`,
+      name: "Traditional Bamboo Basket",
+      description: "Hand-woven by local women artisans.",
+      image: imageA,
+    },
+    {
+      id: `${seed.baseSlug}-${index}-prd-2`,
+      name: "Organic Forest Honey",
+      description: "Pure highland honey sourced by local beekeepers.",
+      image: imageB,
+    },
+    {
+      id: `${seed.baseSlug}-${index}-prd-3`,
+      name: "Loloh Herbal Mix",
+      description: "Traditional herbal blend from village gardens.",
+      image: imageC,
+    },
+  ];
+}
+
+function buildHomestays(seed: DestinationSeed, index: number) {
+  const basePrice = Math.max(250000, Math.floor(seed.price * 0.55));
+  const imageA =
+    DETAIL_GALLERY_IMAGES[(index + 1) % DETAIL_GALLERY_IMAGES.length];
+  const imageB =
+    DETAIL_GALLERY_IMAGES[(index + 4) % DETAIL_GALLERY_IMAGES.length];
+  const imageC =
+    DETAIL_GALLERY_IMAGES[(index + 5) % DETAIL_GALLERY_IMAGES.length];
+
+  return [
+    {
+      id: `${seed.baseSlug}-${index}-stay-1`,
+      name: `${seed.name} Bamboo Haven`,
+      description:
+        "Traditional homestay with open-air living space and garden views.",
+      image: imageA,
+      location: seed.location,
+      price: basePrice,
+      rating: Number((seed.rating - 0.1).toFixed(1)),
+      amenities: ["Breakfast", "Free WiFi", "Village Host"],
+    },
+    {
+      id: `${seed.baseSlug}-${index}-stay-2`,
+      name: `${seed.name} Family Lodge`,
+      description:
+        "A cozy heritage stay managed by local families near cultural hotspots.",
+      image: imageB,
+      location: seed.location,
+      price: basePrice + 90000,
+      rating: Number((seed.rating - 0.05).toFixed(1)),
+      amenities: ["Dinner", "Guided Tour", "Private Bathroom"],
+    },
+    {
+      id: `${seed.baseSlug}-${index}-stay-3`,
+      name: `${seed.name} Eco Sanctuary`,
+      description: "Comfort-focused eco stay with mountain or valley views.",
+      image: imageC,
+      location: seed.location,
+      price: basePrice + 160000,
+      rating: seed.rating,
+      amenities: ["Scenic View", "Shuttle", "Welcome Tea"],
+    },
+  ];
+}
+
 export const MOCK_DESTINATIONS: Destination[] = Array.from(
   { length: TOTAL_DESTINATIONS },
   (_, index) => {
@@ -301,6 +443,7 @@ export const MOCK_DESTINATIONS: Destination[] = Array.from(
       id: `d${index + 1}`,
       name,
       slug,
+      badge: "Cleanest Village in Bali",
       description:
         cycle === 0
           ? seed.description
@@ -327,6 +470,22 @@ export const MOCK_DESTINATIONS: Destination[] = Array.from(
           "Workshop materials",
         ],
       },
+      practicalInfo: {
+        address: seed.address,
+        phone: "+62 812-3456-7890",
+        socials: [
+          { label: "Instagram", href: "#" },
+          { label: "Facebook", href: "#" },
+        ],
+      },
+      facilities: FACILITY_TEMPLATES.map((item) => ({
+        ...item,
+        id: `${seed.baseSlug}-${index}-${item.id}`,
+      })),
+      highlightedAttractions: buildAttractions(seed, index),
+      upcomingEvents: buildEvents(seed, index),
+      localProducts: buildLocalProducts(seed, index),
+      homestays: buildHomestays(seed, index),
       category: seed.category,
       rating: Number(rating.toFixed(1)),
       reviewCount: seed.reviewCount + cycle * 37 + (index % 5) * 11,

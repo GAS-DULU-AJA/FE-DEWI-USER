@@ -6,30 +6,28 @@ interface DescriptionProps {
 
 export function Description({ destination }: DescriptionProps) {
   return (
-    <section className="bg-surface-container-low rounded-[24px] p-8 md:p-10 space-y-8">
-      <div className="space-y-3">
-        <p className="text-xs uppercase tracking-[0.2em] text-on-surface-variant">
-          Overview
+    <section className="space-y-10">
+      <div>
+        <h2 className="text-2xl font-bold tracking-tight text-on-surface mb-4 font-headline">
+          Deskripsi
+        </h2>
+        <p className="text-base md:text-lg leading-relaxed text-on-surface-variant">
+          {destination.longDescription ?? destination.description}
         </p>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight font-headline text-on-surface">
-          {destination.name}
-        </h1>
-        <div className="flex flex-wrap items-center gap-3 text-sm text-on-surface-variant">
-          <span className="rounded-full bg-surface-container-lowest px-3 py-1.5">
-            {destination.location}
-          </span>
-          <span className="rounded-full bg-secondary-container px-3 py-1.5 text-on-secondary-container font-semibold">
-            {destination.rating.toFixed(1)} / 5
-          </span>
-          <span className="rounded-full bg-surface-container-lowest px-3 py-1.5">
-            {destination.reviewCount} reviews
-          </span>
-        </div>
       </div>
 
-      <div className="space-y-5 text-on-surface-variant leading-relaxed text-base md:text-lg">
-        <p>{destination.longDescription ?? destination.description}</p>
-        <p>{destination.history ?? destination.description}</p>
+      <div>
+        <h2 className="text-2xl font-bold tracking-tight text-on-surface mb-4 font-headline">
+          Sejarah
+        </h2>
+        <div className="bg-surface-container-low rounded-[24px] p-6 md:p-8 relative overflow-hidden">
+          <span className="material-symbols-outlined absolute -right-2 -bottom-2 text-8xl text-surface-container-high opacity-60">
+            history
+          </span>
+          <p className="relative z-10 text-base md:text-lg leading-relaxed text-on-surface-variant">
+            {destination.history ?? destination.description}
+          </p>
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">

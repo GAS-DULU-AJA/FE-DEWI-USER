@@ -18,7 +18,7 @@ export function MapView({ map }: MapViewProps) {
   return (
     <section className="space-y-5">
       <h2 className="text-2xl md:text-3xl font-bold font-headline text-on-surface">
-        Map View
+        Lokasi
       </h2>
 
       <div className="rounded-[24px] overflow-hidden bg-surface-container-low shadow-[0_12px_40px_rgba(45,51,53,0.06)]">
@@ -30,7 +30,7 @@ export function MapView({ map }: MapViewProps) {
             loading="lazy"
           />
 
-          <div className="pointer-events-none absolute left-5 top-5 rounded-full bg-primary text-on-primary px-4 py-2.5 text-sm font-semibold shadow-[0_12px_40px_rgba(45,51,53,0.18)]">
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl bg-primary text-on-primary px-4 py-2.5 text-sm font-semibold shadow-[0_12px_40px_rgba(45,51,53,0.18)] animate-bounce">
             {map.label}
           </div>
         </div>

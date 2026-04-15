@@ -1,11 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { BookingCTA } from "./BookingCTA";
 import { Description } from "./Description";
+import { FacilitiesSection } from "./FacilitiesSection";
+import { GalleryTab } from "./GalleryTab";
+import { HighlightedAttractionsSection } from "./HighlightedAttractionsSection";
+import { HomestaysSection } from "./HomestaysSection";
 import { ImageGallery } from "./ImageGallery";
 import { ItineraryPreview } from "./ItineraryPreview";
+import { LocalUmkmSection } from "./LocalUmkmSection";
 import { MapView } from "./MapView";
+import { UpcomingEventsSection } from "./UpcomingEventsSection";
 import { useDestinationDetail } from "../hooks/useDestinationDetail";
 import type { Destination } from "../types";
 
@@ -18,6 +25,8 @@ export function DestinationDetailPageClient({
   slug,
   initialDestination,
 }: DestinationDetailPageClientProps) {
+  const [activeTab, setActiveTab] = useState<"about" | "gallery">("about");
+
   const { data: destination, isFetching } = useDestinationDetail({
     slug,
     initialData: initialDestination,
@@ -66,25 +75,73 @@ export function DestinationDetailPageClient({
           <ImageGallery
             images={destination.gallery ?? [destination.image]}
             title={destination.name}
+            location={destination.location}
+            badge={destination.badge}
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             <div className="lg:col-span-8 space-y-8">
-              <Description destination={destination} />
+              <div className="flex border-b border-outline-variant/30 gap-7">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("about")}
+                  className={`pb-3 text-lg font-bold transition-colors border-b-2 ${
+                    activeTab === "about"
+                      ? "text-primary border-primary"
+                      : "text-on-surface-variant border-transparent"
+                  }`}
+                >
+                  About
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("gallery")}
+                  className={`pb-3 text-lg font-bold transition-colors border-b-2 ${
+                    activeTab === "gallery"
+                      ? "text-primary border-primary"
+                      : "text-on-surface-variant border-transparent"
+                  }`}
+                >
+                  Gallery
+                </button>
+              </div>
 
-              {destination.itinerary && destination.itinerary.length > 0 ? (
-                <ItineraryPreview itinerary={destination.itinerary} />
-              ) : null}
+              {activeTab === "about" ? (
+                <>
+                  <Description destination={destination} />
 
-              {destination.map ? <MapView map={destination.map} /> : null}
+                  {destination.itinerary && destination.itinerary.length > 0 ? (
+                    <ItineraryPreview itinerary={destination.itinerary} />
+                  ) : null}
+                </>
+              ) : (
+                <GalleryTab
+                  images={destination.gallery ?? [destination.image]}
+                  title={destination.name}
+                />
+              )}
             </div>
 
             <div className="lg:col-span-4">
               <BookingCTA destination={destination} />
             </div>
           </div>
+
+          {destination.map ? <MapView map={destination.map} /> : null}
         </div>
       </section>
+
+      <FacilitiesSection facilities={destination.facilities ?? []} />
+
+      <HighlightedAttractionsSection
+        attractions={destination.highlightedAttractions ?? []}
+      />
+
+      <UpcomingEventsSection events={destination.upcomingEvents ?? []} />
+
+      <LocalUmkmSection products={destination.localProducts ?? []} />
+
+      <HomestaysSection homestays={destination.homestays ?? []} />
     </main>
   );
 }

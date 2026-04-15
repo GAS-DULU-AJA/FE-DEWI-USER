@@ -5,6 +5,7 @@ export interface Destination {
   description: string;
   longDescription?: string;
   history?: string;
+  badge?: string;
   location: string;
   address?: string;
   image: string;
@@ -12,6 +13,12 @@ export interface Destination {
   map?: DestinationMap;
   itinerary?: DestinationItineraryItem[];
   booking?: DestinationBookingInfo;
+  practicalInfo?: DestinationPracticalInfo;
+  facilities?: DestinationFacility[];
+  highlightedAttractions?: DestinationAttraction[];
+  upcomingEvents?: DestinationEvent[];
+  localProducts?: DestinationLocalProduct[];
+  homestays?: DestinationHomestay[];
   category: string[];
   rating: number;
   reviewCount: number;
@@ -36,6 +43,57 @@ export interface DestinationBookingInfo {
   duration: string;
   groupSize: string;
   includes: string[];
+}
+
+export interface DestinationPracticalInfo {
+  address: string;
+  phone: string;
+  socials: DestinationSocialLink[];
+}
+
+export interface DestinationSocialLink {
+  label: string;
+  href: string;
+}
+
+export interface DestinationFacility {
+  id: string;
+  icon: string;
+  label: string;
+}
+
+export interface DestinationAttraction {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  tag: string;
+}
+
+export interface DestinationEvent {
+  id: string;
+  day: string;
+  month: string;
+  title: string;
+  description: string;
+}
+
+export interface DestinationLocalProduct {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface DestinationHomestay {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  location: string;
+  price: number;
+  rating: number;
+  amenities: string[];
 }
 
 export type DestinationSort =
