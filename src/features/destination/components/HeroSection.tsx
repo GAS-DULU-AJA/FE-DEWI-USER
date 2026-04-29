@@ -7,11 +7,12 @@ import { SearchBar } from "./SearchBar";
 export function HeroSection() {
   const [village, setVillage] = useState("");
   const [experience, setExperience] = useState("");
-  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   function handleSearch() {
     // Search routing will be implemented in future pages
-    console.log({ village, experience, date });
+    console.log({ village, experience, startDate, endDate });
   }
 
   return (
@@ -36,10 +37,12 @@ export function HeroSection() {
         <SearchBar
           village={village}
           experience={experience}
-          date={date}
+          startDate={startDate}
+          endDate={endDate}
           onVillageChange={setVillage}
           onExperienceChange={setExperience}
-          onDateChange={setDate}
+          onStartDateChange={setStartDate}
+          onEndDateChange={setEndDate}
           onSearch={handleSearch}
         />
       </div>

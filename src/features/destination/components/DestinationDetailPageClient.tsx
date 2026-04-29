@@ -81,14 +81,14 @@ export function DestinationDetailPageClient({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             <div className="lg:col-span-8 space-y-8">
-              <div className="flex border-b border-outline-variant/30 gap-7">
+              <div className="flex gap-7 border-b border-outline-variant/30">
                 <button
                   type="button"
                   onClick={() => setActiveTab("about")}
                   className={`pb-3 text-lg font-bold transition-colors border-b-2 ${
                     activeTab === "about"
                       ? "text-primary border-primary"
-                      : "text-on-surface-variant border-transparent"
+                      : "text-on-surface-variant border-transparent hover:text-primary"
                   }`}
                 >
                   About
@@ -99,7 +99,7 @@ export function DestinationDetailPageClient({
                   className={`pb-3 text-lg font-bold transition-colors border-b-2 ${
                     activeTab === "gallery"
                       ? "text-primary border-primary"
-                      : "text-on-surface-variant border-transparent"
+                      : "text-on-surface-variant border-transparent hover:text-primary"
                   }`}
                 >
                   Gallery

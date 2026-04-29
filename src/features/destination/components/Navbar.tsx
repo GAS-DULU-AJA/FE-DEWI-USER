@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { label: "Destinations", href: "/destinations", active: true },
+  { label: "Destinations", href: "/destinations" },
   { label: "Experiences", href: "/experiences" },
   { label: "Journal", href: "/journal" },
   { label: "About", href: "/about" },
@@ -14,8 +14,9 @@ const navLinks = [
 export function Navbar() {
   const pathname = usePathname();
   const isDestinationDetailRoute = /^\/destinations\/[^/]+$/.test(pathname);
+  const isExperienceDetailRoute = /^\/experiences\/[^/]+$/.test(pathname);
 
-  if (isDestinationDetailRoute) {
+  if (isDestinationDetailRoute || isExperienceDetailRoute) {
     return null;
   }
 
@@ -27,19 +28,24 @@ export function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className={
-                link.active
-                  ? "text-primary font-semibold border-b-2 border-primary pb-1 transition-all duration-300"
-                  : "text-on-surface-variant hover:text-primary transition-colors hover:opacity-80"
-              }
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              pathname === link.href || pathname.startsWith(`${link.href}/`);
+
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={
+                  isActive
+                    ? "text-primary font-semibold border-b-2 border-primary pb-1 transition-all duration-300"
+                    : "text-on-surface-variant hover:text-primary transition-colors hover:opacity-80"
+                }
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-6">
